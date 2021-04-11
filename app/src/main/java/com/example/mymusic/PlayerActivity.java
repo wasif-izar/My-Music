@@ -94,26 +94,27 @@ public class PlayerActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
         mediaPlayer.start();
 
-        updateseekbar = new Thread(){
-            @Override
-            public void run() {
-                int totalDuration = mediaPlayer.getDuration();
-                int currentPosition = 0;
-                while(currentPosition < totalDuration){
-                    try{
-                        sleep(500);
-                        currentPosition = mediaPlayer.getCurrentPosition();
-                        seekmusic.setProgress(currentPosition);
-                    }
-                    catch (InterruptedException | IllegalStateException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        seekmusic.setMax(mediaPlayer.getDuration());
-        updateseekbar.start();
+//        updateseekbar = new Thread(){
+//            @Override
+//            public void run() {
+//                int totalDuration = mediaPlayer.getDuration();
+//                int currentPosition = 0;
+//                while(currentPosition < totalDuration){
+//                    try{
+//                        sleep(500);
+//                        currentPosition = mediaPlayer.getCurrentPosition();
+//                        seekmusic.setProgress(currentPosition);
+//                    }
+//                    catch (InterruptedException | IllegalStateException e)
+//                    {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        };
+//        seekmusic.setMax(mediaPlayer.getDuration());
+//        updateseekbar.start();
+        seekupdate();
         seekmusic.getProgressDrawable().setColorFilter(getResources().getColor(R.color.purple_500), PorterDuff.Mode.MULTIPLY);
         seekmusic.getThumb().setColorFilter(getResources().getColor(R.color.purple_500), PorterDuff.Mode.SRC_IN);
 
@@ -162,13 +163,13 @@ public class PlayerActivity extends AppCompatActivity {
                 }
             }
         });
-        //Automatically play next song
-//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mp) {
-//                btnnext.performClick();
-//            }
-//        });
+       // Automatically play next song
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                btnnext.performClick();
+            }
+        });
 
 
 
@@ -191,8 +192,10 @@ public class PlayerActivity extends AppCompatActivity {
                 mediaPlayer.start();
                 btnplay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
+                seekupdate();
                 String endTime = createTime(mediaPlayer.getDuration());
                 txtsstop.setText(endTime);
+                seekmusic.setMax(mediaPlayer.getDuration());
                 int audiosessionId = mediaPlayer.getAudioSessionId();
                 if(audiosessionId != -1){
                     visualizer.setAudioSessionId(audiosessionId);
@@ -213,6 +216,8 @@ public class PlayerActivity extends AppCompatActivity {
                 mediaPlayer.start();
                 btnplay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
+                seekupdate();
+                seekmusic.setMax(mediaPlayer.getDuration());
                 String endTime = createTime(mediaPlayer.getDuration());
                 txtsstop.setText(endTime);
                 int audiosessionId = mediaPlayer.getAudioSessionId();
@@ -263,4 +268,27 @@ public class PlayerActivity extends AppCompatActivity {
         time+=sec;
         return time;
     }
+
+   public void seekupdate(){
+       updateseekbar = new Thread(){
+           @Override
+           public void run() {
+               int totalDuration = mediaPlayer.getDuration();
+               int currentPosition = 0;
+               while(currentPosition < totalDuration){
+                   try{
+                       sleep(500);
+                       currentPosition = mediaPlayer.getCurrentPosition();
+                       seekmusic.setProgress(currentPosition);
+                   }
+                   catch (InterruptedException | IllegalStateException e)
+                   {
+                       e.printStackTrace();
+                   }
+               }
+           }
+       };
+       seekmusic.setMax(mediaPlayer.getDuration());
+       updateseekbar.start();
+   }
 }
