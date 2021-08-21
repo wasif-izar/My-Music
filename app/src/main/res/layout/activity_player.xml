@@ -45,40 +45,43 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp">
+
             <SeekBar
                 android:id="@+id/seekbar"
-                android:layout_centerInParent="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="20dp"
-                android:layout_marginBottom="40dp"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content">
-            </SeekBar>
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="00dp"
+                android:layout_marginBottom="20dp"></SeekBar>
+
             <TextView
                 android:id="@+id/txtsstart"
-                android:layout_toStartOf="@+id/seekbar"
-                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="false"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="20dp"
+                android:layout_toStartOf="@+id/seekbar"
                 android:text="@string/_0_10"
                 android:textColor="#FFF"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:textSize="14sp">
 
             </TextView>
 
             <TextView
                 android:id="@+id/txtsstop"
-                android:layout_toEndOf="@+id/seekbar"
-                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
+                android:layout_centerInParent="true"
                 android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/seekbar"
                 android:text="@string/_4_10"
                 android:textColor="#FFF"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:textSize="14sp">
 
             </TextView>
         </RelativeLayout>

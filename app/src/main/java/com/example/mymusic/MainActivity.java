@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,9 +63,6 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<File> findSong(File file) {
         ArrayList arrayList = new ArrayList();
         File [] files = file.listFiles();
-        if(files == null){
-            Toast.makeText(this, "No songs to play", Toast.LENGTH_SHORT).show();
-        }
         if(files != null) {
             for (File singlefile : files) {
                 if (singlefile.isDirectory() && !singlefile.isHidden()) {
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-            return arrayList;
+        return arrayList;
         }
 
 
@@ -91,21 +89,30 @@ public class MainActivity extends AppCompatActivity {
                 items[i] = mySongs.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
 
             }
+            if(mySongs.size() == 0){
+                String nop = "No song dude";
+                Toast.makeText(this, "No songs to Play", Toast.LENGTH_SHORT).show();
+                items = new String[1];
+                items[0] = "No songs to display";
+            }
        /* ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
         listView.setAdapter(myAdapter);*/
+
             customAdapter customAdapter = new customAdapter();
             listView.setAdapter(customAdapter);
+            if(mySongs.size() != 0) {
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String songName = (String) listView.getItemAtPosition(position);
+                        startActivity(new Intent(getApplicationContext(), PlayerActivity.class)
+                                .putExtra("songs", mySongs)
+                                .putExtra("songname", songName)
+                                .putExtra("pos", position));
+                    }
+                });
+            }
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String songName = (String) listView.getItemAtPosition(position);
-                    startActivity(new Intent(getApplicationContext(), PlayerActivity.class)
-                            .putExtra("songs", mySongs)
-                            .putExtra("songname", songName)
-                            .putExtra("pos", position));
-                }
-            });
         }
         catch(NullPointerException e){
             Toast.makeText(this, "Null exception", Toast.LENGTH_SHORT).show();
