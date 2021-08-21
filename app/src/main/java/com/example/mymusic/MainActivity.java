@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<File> findSong(File file) {
         ArrayList arrayList = new ArrayList();
         File [] files = file.listFiles();
+        if(files == null){
+            Toast.makeText(this, "No songs to play", Toast.LENGTH_SHORT).show();
+        }
         if(files != null) {
             for (File singlefile : files) {
                 if (singlefile.isDirectory() && !singlefile.isHidden()) {

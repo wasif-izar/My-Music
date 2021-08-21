@@ -22,7 +22,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:padding="10dp"
             android:singleLine="true"
-            android:text="Song name"
+            android:text="@string/song_name"
             android:textColor="#FFF"
             android:textSize="22sp"
             android:textAlignment="center"
@@ -37,7 +37,8 @@
             android:layout_marginBottom="8dp"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@drawable/music">
+            android:src="@drawable/music"
+            android:contentDescription="@string/todo">
 
         </ImageView>
 
@@ -55,11 +56,11 @@
             </SeekBar>
             <TextView
                 android:id="@+id/txtsstart"
-                android:layout_toLeftOf="@+id/seekbar"
+                android:layout_toStartOf="@+id/seekbar"
                 android:layout_centerInParent="true"
-                android:layout_alignParentLeft="false"
-                android:layout_marginLeft="20dp"
-                android:text="0:10"
+                android:layout_alignParentStart="false"
+                android:layout_marginStart="20dp"
+                android:text="@string/_0_10"
                 android:textColor="#FFF"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
@@ -69,11 +70,11 @@
 
             <TextView
                 android:id="@+id/txtsstop"
-                android:layout_toRightOf="@+id/seekbar"
+                android:layout_toEndOf="@+id/seekbar"
                 android:layout_centerInParent="true"
-                android:layout_alignParentRight="false"
-                android:layout_marginRight="20dp"
-                android:text="4:10"
+                android:layout_alignParentEnd="false"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_4_10"
                 android:textColor="#FFF"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
@@ -91,54 +92,60 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/playbtn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/ic_pause"
-                android:layout_width="70dp"
-                android:layout_height="70dp">
+                tools:ignore="SpeakableTextPresentCheck">
 
             </Button>
 
             <Button
                 android:id="@+id/btnnext"
-                android:layout_toRightOf="@+id/playbtn"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/ic_next"
                 android:layout_width="50dp"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/playbtn"
+                android:background="@drawable/ic_next"
+                tools:ignore="SpeakableTextPresentCheck">
 
             </Button>
 
             <Button
                 android:id="@+id/btnprev"
-                android:layout_toLeftOf="@+id/playbtn"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/ic_previous"
                 android:layout_width="50dp"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_toStartOf="@+id/playbtn"
+                android:background="@drawable/ic_previous"
+                tools:ignore="SpeakableTextPresentCheck">
 
             </Button>
 
             <Button
                 android:id="@+id/btnff"
-                android:layout_toRightOf="@id/btnnext"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@id/btnnext"
                 android:background="@drawable/ic_fast_forward"
-                android:layout_width="40dp"
-                android:layout_height="40dp">
+                tools:ignore="SpeakableTextPresentCheck">
 
             </Button>
 
             <Button
                 android:id="@+id/btnfr"
-                android:layout_toLeftOf="@id/btnprev"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@id/btnprev"
                 android:background="@drawable/ic_fast_rewind"
-                android:layout_width="40dp"
-                android:layout_height="40dp">
+                tools:ignore="SpeakableTextPresentCheck">
 
             </Button>
 
